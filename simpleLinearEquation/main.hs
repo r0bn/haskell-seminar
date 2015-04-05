@@ -26,7 +26,8 @@ gauss a b = x
         a' = zipWith (++) a b'
         
         -- brings matrix in triangle form and resubstitute
-        x = resubstitute $ triangular a'
+        -- x = resubstitute $ triangular a'
+        x = triangular a'
 
 -- Bringt die Matrix in die Dreiecksform, arbeitet rekursiv
 -- Ruft als erstes rotatePivot auf die Matrix auf
@@ -103,6 +104,11 @@ resubstitute' (row:rows) = x:(resubstitute' rows')
 -- https://www.youtube.com/watch?v=2j5Ic2V7wq4
 exampleA = [[1,1,-1], [0,1,3], [-1,0,-2]] :: Matrix
 exampleb = [9,3,2] :: Vector
+
+-- Test 03
+-- moodle x3 is free, creates infinite loop at rotatePivot
+-- exampleA = [[1,2,3], [4,5,6], [7,8,9]] :: Matrix
+-- exampleb = [1,2,3] :: Vector
 
 main = do
     -- print $ mapMatrix exampleA exampleb

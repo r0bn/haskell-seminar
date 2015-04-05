@@ -1,7 +1,14 @@
 # haskell-seminar
 
-## simple implentations without parallel
-* [simpleLinearEquations.hs](simpleLinearEquations.hs)
+## simple linear equation without parallel
+
+working gauss haskell algorithmus
+
+
+Install dependencies and build
+```
+cabal install
+```
 
 ## folder other
 
