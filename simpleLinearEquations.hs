@@ -25,9 +25,8 @@ gauss a b = x
         -- appends/combine formated vector to matrix
         a' = zipWith (++) a b'
         
-        -- x = resubstitute $ triangular a'
-        -- brings matrix in triangle form
-        x = triangular a'
+        -- brings matrix in triangle form and resubstitute
+        x = resubstitute $ triangular a'
 
 -- Bringt die Matrix in die Dreiecksform, arbeitet rekursiv
 -- Ruft als erstes rotatePivot auf die Matrix auf
@@ -75,6 +74,27 @@ rotatePivot (row:rows)
     | (head row) /= 0 = (row:rows)
     | otherwise       = rotatePivot (rows ++ [row])
 
+
+-- First ververse the columns to have the last unknown in the head column
+-- and reverse the rows as well to start with the equation that has only on
+-- unkown. Afterward wie to undo the column reversion
+resubstitute :: Matrix -> Vector
+resubstitute = reverse . resubstitute' . reverse . map reverse
+
+-- calculate the solution from the first equation with only one unknown and
+-- substitute this result into the other equation
+resubstitute' :: Matrix -> Vector
+resubstitute' [] = []
+-- works rekursive, every round elimantes one variable
+resubstitute' (row:rows) = x:(resubstitute' rows')
+    where
+        -- calculate current variable
+        x       = (head row)/(last row)
+        -- insert in every other pending equation
+        rows'   = map substituteUnknown rows
+        -- calcualte and consult for the next round
+        substituteUnknown (a1:(a2:as')) = ((a1 - x * a2):as')
+
 -- Test 01
 -- exampleA = [[1,1,0], [0,1,1], [1,0,1]] :: Matrix
 -- exampleb = [2,3,4] :: Vector
@@ -85,5 +105,6 @@ exampleA = [[1,1,-1], [0,1,3], [-1,0,-2]] :: Matrix
 exampleb = [9,3,2] :: Vector
 
 main = do
-    print $ mapMatrix exampleA exampleb
+    -- print $ mapMatrix exampleA exampleb
     print $ gauss exampleA exampleb
+
