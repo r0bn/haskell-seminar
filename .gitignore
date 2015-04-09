@@ -10,3 +10,8 @@ cabal-dev
 cabal.sandbox.config
 cabal.config
 sdf
+.idea
+parser/parser.iml
+parser/.idea
+haskell-seminar.cabal
+main_csvParser.hs
