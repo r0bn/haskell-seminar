@@ -1,6 +1,8 @@
 -- Base https://haskellicious.wordpress.com/2012/11/26/the-gauss-algorithm-in-haskell/
 
-type Number = Double
+import Parser
+
+type Number = Float 
 type Vector = [Number]
 type Row    = [Number]
 type Matrix = [Row]
@@ -26,8 +28,7 @@ gauss a b = x
         a' = zipWith (++) a b'
         
         -- brings matrix in triangle form and resubstitute
-        -- x = resubstitute $ triangular a'
-        x = triangular a'
+        x = resubstitute $ triangular a'
 
 -- Bringt die Matrix in die Dreiecksform, arbeitet rekursiv
 -- Ruft als erstes rotatePivot auf die Matrix auf
@@ -111,6 +112,16 @@ exampleb = [9,3,2] :: Vector
 -- exampleb = [1,2,3] :: Vector
 
 main = do
-    -- print $ mapMatrix exampleA exampleb
-    print $ gauss exampleA exampleb
+    x <- loadMatrix "test_matrix_3x3.csv"
+
+    let cols = getCols x
+    let rows = getRows x
+    print cols
+    print rows
+    let matrix = getMatrix x cols rows
+    let vector = getVector x cols
+    print matrix
+    print vector 
+
+    print $ gauss matrix vector
 

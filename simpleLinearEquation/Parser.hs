@@ -1,6 +1,15 @@
+module Parser
+( getCols
+, getRows
+, getMatrix
+, getVector
+, loadMatrix
+) where
+
 import Control.Monad
 import Control.Exception
 import Data.Char (isSpace)
+
 
 main = do
     x <- loadMatrix "test_matrix_3x3.csv"
