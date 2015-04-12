@@ -1,0 +1,161 @@
+\documentclass[a4paper,       % Size DIN A4
+               10,          % Have large fonts
+               bibtotoc,      %
+               idxtotoc,      %
+               oneside,       % FINAL: UNCOMMENT, result should be printed onesided
+%               twoside,       % FINAL: Comment this, also to save paper.
+%               openany,       % FINAL: Comment this to, also to save paper
+%               draft          % Turn on draft mode -- does not show pictures, colored backrefs and is faster
+               final          % FINAL: UNCOMMENT, all pictures included
+]{scrbook}
+
+%
+% Loading all packages
+%
+\typeout{  }
+\typeout{Loading LaTeX2e packages ... }
+\typeout{-------------------------------------------------------------------}
+\usepackage[utf8]{inputenc}                      % deutsche Umlaute
+\usepackage{ifthen}                              % To allow if-statements
+
+\usepackage{t1enc}                               % For better breakup of Umlaute
+\usepackage{xcolor}                              % color support
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}                             % math stuff
+\usepackage{amssymb}                             % math symbols
+\usepackage{float}                               % Floating Figures "a point" ???
+\usepackage{here}                                % Place Figures and Tables *HERE* \begin{figure}[H]
+\usepackage[format=hang,                         % Select the hang-format
+            labelfont=bf]                        % With bold fonts for the label
+            {caption}                            % Better captions package
+\usepackage{version}                             % comment or versioning environment
+  \includeversion{ready}                         % Used to mark text as ready
+  \includeversion{notready}                      % EXCLUDE if not yet ready for prime-time
+  \includeversion{final}                         % EXCLUDE if not yet ready for prime-time INCLUDE for the FINAL
+  \excludeversion{never}                         % EXCLUDE ALWAYS
+%  \includeonly{shortversion}                    % To just include the short version for CEOs
+
+\usepackage{url}                                 % For nice URLs and email-definitions
+                                                 % Possible options: hyphens, obeyspaces, spaces, LY1, T1, allowmove
+\usepackage{acronym}                             % For explanation of Acronyms and Glossary,
+                                                 % possible options: footnote, nohyperlinks, printonlyused, smaller, dua
+\usepackage[ngerman,english]{babel}              % Select both languages for figures, hyphenation. Here New German
+\usepackage{longtable}                           % multi page tables
+                                                 % Possible options: errorshow, pausing, set, final
+\usepackage[ngerman]{varioref}                   % Better referencing of Pages, Sections, using \vref
+%\vrefwarning                                     % Turn varioref errors into warning (looping vref). FOR FINAL; THIS SHOULD BE COMMENTED
+\usepackage[numbers,sort&compress]{natbib}       % Natural citations, does the same as citesort, but does not need chapterbib.
+\usepackage{bibgerm}                             % German bibliography, needed for gerplain-bibtex style file.
+
+\usepackage{eurosym}                             % Should be defined before german, (or babel?)
+
+\usepackage{units}                               % Package to define new Units \unit[wert]{einheit}, e.g. 5mm
+                                                 % \unitfrac[wert]{zähler}{nenner}, Bsp.: 5 g/m
+                                                 % \nicefrac[schrift]{zähler}{nenner}
+%
+% Should come last, as it redefines many commands
+%
+%%%%% Packages Depending on whether we are using pdflatex or latex %%%%%%%%%%%%%%%%%
+\usepackage{ifpdf}
+\ifpdf
+  \typeout{  }
+  \typeout{Loading PDF-Graphicx packages ... }
+  \typeout{-------------------------------------------------------------------}
+
+  \usepackage[pdftex]{graphicx}                   % graphics extension
+  \DeclareGraphicsExtensions{.pdf}                % In case of using pdflatex set ext.
+  \usepackage[pdftex,                             % For PDF output
+              % backref=true,                       % FINAL: Comment to turn off backreferences
+              % baseurl={XXX},                      % FINAL: Insert the actual URL
+              colorlinks=true,
+              linkcolor=black,                    % Default: red  % FOR FINAL PRINTING:black, FOR ONLINE:blue
+              anchorcolor=black,                  % Default: black
+              citecolor=red,                      % Default: green
+              filecolor=black,                    % Default: magenta
+              menucolor=red,                      % Default: red
+              pagecolor=red,                      % Default: red
+              urlcolor=blue,                      % Default: Cyan
+              pdfmenubar=false,
+              pdfpagelabels,
+              pdfauthor={Rainer Keller},
+              % ACHTUNG: WENN TITEL GEAENDERT WIRD, AUCH IN titel.tex ANPASSEN (PDFLATEX)
+              pdftitle={Analyse und Optimierung der Softwareschichten von wissenschaftlichen Anwendungen für Metacomputing},
+              pdfsubject={Analyse und Optimierung der Softwareschichten von wissenschaftlichen Anwendungen für Metacomputing},
+              pdfkeywords={Metacomputing, Message Passing, MPI, PACX-MPI},
+              hypertexnames=false]{hyperref}      % For hyperlinks
+\else
+  \typeout{  }
+  \typeout{Loading EPS-Graphicx packages ... }
+  \typeout{-------------------------------------------------------------------}
+
+  \usepackage{graphicx}                           % graphics extension
+  \DeclareGraphicsExtensions{.eps}                % In case of using pdflatex set ext.
+  \usepackage[dvips,                              % For EPS output
+              % backref=true,                       % FINAL: Turn this off by commenting
+              % baseurl={XXX},                      % FINAL: Insert the actual URL
+              colorlinks=true,
+              linkcolor=blue,                     % Default: red
+              anchorcolor=black,                  % Default: black
+              citecolor=red,                      % Default: green
+              filecolor=black,                    % Default: magenta
+              menucolor=red,                      % Default: red
+              pagecolor=red,                      % Default: red
+              urlcolor=blue,                      % Default: Cyan
+              hypertexnames=false]{hyperref}      % For hyperlinks
+\fi
+
+%
+% Include commands and definitions
+%
+\typeout{  }
+\typeout{Including Definitions and Acronyms and make index and glossary... }
+\typeout{-------------------------------------------------------------------}
+\input{hyphenation}
+%
+% Preamble commands:
+%
+\addtolength{\evensidemargin}{-12mm}             % Page setup: Binderand groesser als Seitenrand
+\addtolength{\oddsidemargin}{12mm}
+%\graphicspath{{FIGURES/}{RESULTS/}}                % For automatic searching of graphic files with graphicx.
+\makeindex
+\setlongtables                                   % Uncomment for FINAL version
+
+\bibliographystyle{gerplain}                     % German Bibliogrpah
+
+\typeout{  }
+\typeout{Going to Begin Document... }
+\typeout{-------------------------------------------------------------------}
+\begin{document}
+  \selectlanguage{ngerman}
+  \input{titel}
+  \thispagestyle{empty}
+  \cleardoublepage
+  \frontmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \listoffigures
+  \listoftables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%\nocite{*}                                       % FINAL Comment. Otherwise all citations in DB are included
+\nocite{mpi95}
+\nocite{gropp96}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \typeout{  }
+  \typeout{Begin Mainmatter... }
+  \typeout{-------------------------------------------------------------------}
+  \mainmatter
+
+  \input {einleitung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \typeout{  }
+  \typeout{Begin Backmatter... }
+  \typeout{-------------------------------------------------------------------}
+  \backmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \bibliography{literature}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\nocite{
+\end{document}

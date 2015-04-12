@@ -15,3 +15,17 @@ parser/parser.iml
 parser/.idea
 haskell-seminar.cabal
 main_csvParser.hs
+
+*.aux
+*.bbl
+*.blg
+*.idx
+*.log
+*.lof
+*.log
+*.pdf
+*.pdflatex_output
+*.bib
+*.lot
+*.out
+*.toc
