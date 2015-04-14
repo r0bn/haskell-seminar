@@ -19,7 +19,7 @@ mapMatrix matrix vector = [sum (zipWith (*) row vector) | row <- matrix]
 -- First it consults the Matrix and Parameter Vecotor to
 -- one Matrix
 -- TODO remove comment if funciton complete
--- gauss :: Matrix -> Vector -> Vector
+gauss :: Matrix -> Vector -> Vector
 gauss a b = x
     where
         -- brings the vector in matrix format (double array form)
@@ -112,7 +112,7 @@ exampleb = [9,3,2] :: Vector
 -- exampleb = [1,2,3] :: Vector
 
 main = do
-    x <- loadMatrix "test_matrix_3x3.csv"
+    x <- loadMatrix "matrix.csv"
 
     let cols = getCols x
     let rows = getRows x
@@ -120,8 +120,8 @@ main = do
     print rows
     let matrix = getMatrix x cols rows
     let vector = getVector x cols
-    print matrix
-    print vector 
+    -- print matrix
+    -- print vector 
 
     print $ gauss matrix vector
 
