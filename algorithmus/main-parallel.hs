@@ -6,6 +6,7 @@ import Control.Exception
 import Formatting
 import Formatting.Clock
 import System.Clock
+import Data.Time
 
 import Parser
 
@@ -119,7 +120,7 @@ exampleb = [9,3,2] :: Vector
 -- exampleb = [1,2,3] :: Vector
 
 main = do
-    x <- loadMatrix "test_matrix_3x3.csv"
+    x <- loadMatrix "../MATRIX Seminar/matrix_1024x1024.csv"
 
     let cols = getCols x
     let rows = getRows x
@@ -127,13 +128,17 @@ main = do
     --print rows
     let matrix = getMatrix x cols rows
     let vector = getVector x cols
-    print matrix
-    print vector
+--    print matrix
+--    print vector
 
-    start <- getTime Monotonic
-    let ergebnis = gauss matrix vector
-    end <- getTime Monotonic
-    fprint $ (timeSpecs % "\n") start end
+    start <- getCurrentTime
+    let! ergebnis = gauss matrix vector
+    end <- getCurrentTime
+--    fprint (timeSpecs % "\n") start end
+    print ergebnis
+    print $ diffUTCTime end start
+    print start
+    print end
 
 --    print $ gauss matrix vector
 
