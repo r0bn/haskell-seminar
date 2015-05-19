@@ -2,6 +2,10 @@
 
 import Control.Parallel
 import Control.Parallel.Strategies
+import Control.Exception
+import Formatting
+import Formatting.Clock
+import System.Clock
 
 import Parser
 
@@ -22,7 +26,7 @@ mapMatrix matrix vector = [sum (zipWith (*) row vector) | row <- matrix]
 -- First it consults the Matrix and Parameter Vecotor to
 -- one Matrix
 -- TODO remove comment if funciton complete
--- gauss :: Matrix -> Vector -> Vector
+gauss :: Matrix -> Vector -> Vector
 gauss a b = x
     where
         -- brings the vector in matrix format (double array form)
@@ -115,16 +119,21 @@ exampleb = [9,3,2] :: Vector
 -- exampleb = [1,2,3] :: Vector
 
 main = do
-    x <- loadMatrix "matrix.csv"
+    x <- loadMatrix "test_matrix_3x3.csv"
 
     let cols = getCols x
     let rows = getRows x
-    print cols
-    print rows
+    --print cols
+    --print rows
     let matrix = getMatrix x cols rows
     let vector = getVector x cols
-    -- print matrix
-    -- print vector 
+    print matrix
+    print vector
 
-    print $ gauss matrix vector
+    start <- getTime Monotonic
+    let ergebnis = gauss matrix vector
+    end <- getTime Monotonic
+    fprint $ (timeSpecs % "\n") start end
+
+--    print $ gauss matrix vector
 
